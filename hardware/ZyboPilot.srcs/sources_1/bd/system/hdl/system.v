@@ -1,7 +1,7 @@
 //Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2014.3 (lin64) Build 1034051 Fri Oct  3 16:32:59 MDT 2014
-//Date        : Tue Nov 11 15:29:01 2014
+//Date        : Tue Nov 11 21:55:15 2014
 //Host        : john-laptop running 64-bit Ubuntu 14.04.1 LTS
 //Command     : generate_target system.bd
 //Design      : system
@@ -1365,6 +1365,10 @@ module system
     IIC_0_sda_o,
     IIC_0_sda_t,
     LEDs_4Bits_tri_o,
+    PORTB_CTSN,
+    PORTB_RTSN,
+    PORTB_RX,
+    PORTB_TX,
     PWM,
     RCVR_GND,
     RCVR_IN,
@@ -1398,6 +1402,10 @@ module system
   output IIC_0_sda_o;
   output IIC_0_sda_t;
   output [3:0]LEDs_4Bits_tri_o;
+  input PORTB_CTSN;
+  output PORTB_RTSN;
+  input PORTB_RX;
+  output PORTB_TX;
   output [11:0]PWM;
   output [0:0]RCVR_GND;
   input RCVR_IN;
@@ -1446,6 +1454,8 @@ module system
   wire [3:0]S00_AXI_1_WSTRB;
   wire S00_AXI_1_WVALID;
   wire [3:0]SWs_4Bits_GPIO_TRI_I;
+  wire UART0_CTSN_1;
+  wire UART0_RX_1;
   wire VCC_1;
   wire [0:0]proc_sys_reset_0_peripheral_aresetn;
   wire [14:0]processing_system7_0_DDR_ADDR;
@@ -1477,6 +1487,8 @@ module system
   wire processing_system7_0_IIC_0_SDA_I;
   wire processing_system7_0_IIC_0_SDA_O;
   wire processing_system7_0_IIC_0_SDA_T;
+  wire processing_system7_0_UART0_RTSN;
+  wire processing_system7_0_UART0_TX;
   wire [8:0]processing_system7_0_axi_periph_M00_AXI_ARADDR;
   wire processing_system7_0_axi_periph_M00_AXI_ARREADY;
   wire processing_system7_0_axi_periph_M00_AXI_ARVALID;
@@ -1577,9 +1589,13 @@ module system
   assign IIC_0_sda_o = processing_system7_0_IIC_0_SDA_O;
   assign IIC_0_sda_t = processing_system7_0_IIC_0_SDA_T;
   assign LEDs_4Bits_tri_o[3:0] = LEDs_4Bits_GPIO_TRI_O;
+  assign PORTB_RTSN = processing_system7_0_UART0_RTSN;
+  assign PORTB_TX = processing_system7_0_UART0_TX;
   assign PWM[11:0] = servo_pwm_v1_0_0_PWM;
   assign RCVR_GND[0] = xlconstant_0_dout;
   assign SWs_4Bits_GPIO_TRI_I = SWs_4Bits_tri_i[3:0];
+  assign UART0_CTSN_1 = PORTB_CTSN;
+  assign UART0_RX_1 = PORTB_RX;
   assign processing_system7_0_IIC_0_SCL_I = IIC_0_scl_i;
   assign processing_system7_0_IIC_0_SDA_I = IIC_0_sda_i;
   assign pulsetrain_in_1 = RCVR_IN;
@@ -1753,6 +1769,13 @@ system_processing_system7_0_0 processing_system7_0
         .PS_PORB(FIXED_IO_ps_porb),
         .PS_SRSTB(FIXED_IO_ps_srstb),
         .SDIO0_WP(xlconstant_0_const),
+        .UART0_CTSN(UART0_CTSN_1),
+        .UART0_DCDN(GND_1),
+        .UART0_DSRN(GND_1),
+        .UART0_RIN(GND_1),
+        .UART0_RTSN(processing_system7_0_UART0_RTSN),
+        .UART0_RX(UART0_RX_1),
+        .UART0_TX(processing_system7_0_UART0_TX),
         .USB0_VBUS_PWRFAULT(GND_1));
 system_processing_system7_0_axi_periph_0 processing_system7_0_axi_periph
        (.ACLK(processing_system7_0_FCLK_CLK0),

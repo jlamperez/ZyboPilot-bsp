@@ -1,7 +1,7 @@
 //Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2014.3 (lin64) Build 1034051 Fri Oct  3 16:32:59 MDT 2014
-//Date        : Tue Nov 11 15:29:02 2014
+//Date        : Tue Nov 11 21:55:16 2014
 //Host        : john-laptop running 64-bit Ubuntu 14.04.1 LTS
 //Command     : generate_target system_wrapper.bd
 //Design      : system_wrapper
@@ -31,6 +31,10 @@ module system_wrapper
     FIXED_IO_ps_clk,
     FIXED_IO_ps_porb,
     FIXED_IO_ps_srstb,
+    PORTB_CTSN,
+    PORTB_RTSN,
+    PORTB_RX,
+    PORTB_TX,
     PWM,
     RCVR_GND,
     RCVR_IN,
@@ -60,6 +64,10 @@ module system_wrapper
   inout FIXED_IO_ps_clk;
   inout FIXED_IO_ps_porb;
   inout FIXED_IO_ps_srstb;
+  input PORTB_CTSN;
+  output PORTB_RTSN;
+  input PORTB_RX;
+  output PORTB_TX;
   output [11:0]PWM;
   output [0:0]RCVR_GND;
   input RCVR_IN;
@@ -90,6 +98,10 @@ module system_wrapper
   wire FIXED_IO_ps_clk;
   wire FIXED_IO_ps_porb;
   wire FIXED_IO_ps_srstb;
+  wire PORTB_CTSN;
+  wire PORTB_RTSN;
+  wire PORTB_RX;
+  wire PORTB_TX;
   wire [11:0]PWM;
   wire [0:0]RCVR_GND;
   wire RCVR_IN;
@@ -145,6 +157,10 @@ system system_i
         .IIC_0_sda_o(iic_0_sda_o),
         .IIC_0_sda_t(iic_0_sda_t),
         .LEDs_4Bits_tri_o(leds_4bits_tri_o),
+        .PORTB_CTSN(PORTB_CTSN),
+        .PORTB_RTSN(PORTB_RTSN),
+        .PORTB_RX(PORTB_RX),
+        .PORTB_TX(PORTB_TX),
         .PWM(PWM),
         .RCVR_GND(RCVR_GND),
         .RCVR_IN(RCVR_IN),

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Tue Nov 11 15:28:59 2014" VIVADOVERSION="2014.3">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Tue Nov 11 21:55:12 2014" VIVADOVERSION="2014.3">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z010" NAME="system_imp" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -47,6 +47,26 @@
     <PORT DIR="O" LEFT="0" NAME="RCVR_GND" RIGHT="0" SIGIS="undef" SIGNAME="xlconstant_0_dout">
       <CONNECTIONS>
         <CONNECTION INSTANCE="xlconstant_0" PORT="dout"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="PORTB_RTSN" SIGIS="undef" SIGNAME="processing_system7_0_UART0_RTSN">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="processing_system7_0" PORT="UART0_RTSN"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="PORTB_TX" SIGIS="undef" SIGNAME="processing_system7_0_UART0_TX">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="processing_system7_0" PORT="UART0_TX"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="PORTB_CTSN" SIGIS="undef" SIGNAME="External_Ports_PORTB_CTSN">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="processing_system7_0" PORT="UART0_CTSN"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="PORTB_RX" SIGIS="undef" SIGNAME="External_Ports_PORTB_RX">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="processing_system7_0" PORT="UART0_RX"/>
       </CONNECTIONS>
     </PORT>
   </EXTERNALPORTS>
@@ -734,8 +754,8 @@
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="aresetn"/>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="aresetn"/>
             <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_aresetn"/>
-            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_aresetn"/>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="aresetn"/>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_aresetn"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -4543,7 +4563,7 @@
     </MODULE>
     <MODULE HWVERSION="1.00.a" INSTANCE="ps7_clockc_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" IS_PL="FALSE" MODCLASS="PERIPHERAL" MODTYPE="ps7_clockc">
       <PARAMETERS>
-        <PARAMETER NAME="C_HAS_MODEM" VALUE="0"/>
+        <PARAMETER NAME="C_HAS_MODEM" VALUE="1"/>
         <PARAMETER NAME="C_INPUT_CRYSTAL_FREQ_HZ" VALUE="50000000"/>
         <PARAMETER NAME="C_INTERCONNECT_S_AXI_MASTERS" VALUE="ps7_cortexa9_0.M_AXI_DP &amp; ps7_cortexa9_1.M_AXI_DP"/>
         <PARAMETER NAME="C_UART_CLK_FREQ_HZ" VALUE="50000000"/>
@@ -4580,8 +4600,8 @@
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="aclk"/>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="aclk"/>
             <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_aclk"/>
-            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_aclk"/>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="aclk"/>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_aclk"/>
           </CONNECTIONS>
         </PORT>
         <PORT CLKFREQUENCY="150000000" DIR="O" NAME="FCLK1" SIGIS="CLK" SIGNAME="ps7_clockc_0_FCLK1">
@@ -4764,8 +4784,16 @@
             <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_WVALID"/>
           </CONNECTIONS>
         </PORT>
-        <PORT CLKFREQUENCY="50000000" DIR="O" NAME="UART0" SIGIS="CLK"/>
-        <PORT CLKFREQUENCY="108333336" DIR="O" NAME="UART0_APER" SIGIS="CLK"/>
+        <PORT CLKFREQUENCY="50000000" DIR="O" NAME="UART0" SIGIS="CLK" SIGNAME="ps7_clockc_0_UART0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="REF_CLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="108333336" DIR="O" NAME="UART0_APER" SIGIS="CLK" SIGNAME="ps7_clockc_0_UART0_APER">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="APER_CLK"/>
+          </CONNECTIONS>
+        </PORT>
         <PORT CLKFREQUENCY="50000000" DIR="O" NAME="UART1" SIGIS="CLK" SIGNAME="ps7_clockc_0_UART1">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="REF_CLK"/>
@@ -4782,6 +4810,153 @@
           </CONNECTIONS>
         </PORT>
         <PORT CLKFREQUENCY="108333336" DIR="O" NAME="USB1_APER" SIGIS="CLK"/>
+      </PORTS>
+      <BUSINTERFACES>
+        <BUSINTERFACE BUSNAME="ps7_axi_interconnect_0" NAME="S_AXI" TYPE="SLAVE">
+          <PORTMAPS>
+            <PORTMAP PHYSICAL="S_AXI_ACLK"/>
+            <PORTMAP PHYSICAL="S_AXI_ARESETN"/>
+            <PORTMAP PHYSICAL="S_AXI_AWADDR"/>
+            <PORTMAP PHYSICAL="S_AXI_AWVALID"/>
+            <PORTMAP PHYSICAL="S_AXI_AWREADY"/>
+            <PORTMAP PHYSICAL="S_AXI_WDATA"/>
+            <PORTMAP PHYSICAL="S_AXI_WSTRB"/>
+            <PORTMAP PHYSICAL="S_AXI_WVALID"/>
+            <PORTMAP PHYSICAL="S_AXI_WREADY"/>
+            <PORTMAP PHYSICAL="S_AXI_BRESP"/>
+            <PORTMAP PHYSICAL="S_AXI_BVALID"/>
+            <PORTMAP PHYSICAL="S_AXI_BREADY"/>
+            <PORTMAP PHYSICAL="S_AXI_ARADDR"/>
+            <PORTMAP PHYSICAL="S_AXI_ARVALID"/>
+            <PORTMAP PHYSICAL="S_AXI_ARREADY"/>
+            <PORTMAP PHYSICAL="S_AXI_RDATA"/>
+            <PORTMAP PHYSICAL="S_AXI_RRESP"/>
+            <PORTMAP PHYSICAL="S_AXI_RVALID"/>
+            <PORTMAP PHYSICAL="S_AXI_RREADY"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+      </BUSINTERFACES>
+    </MODULE>
+    <MODULE HWVERSION="1.00.a" INSTANCE="ps7_uart_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" IS_PL="FALSE" MODCLASS="PERIPHERAL" MODTYPE="ps7_uart">
+      <PARAMETERS>
+        <PARAMETER NAME="C_HAS_MODEM" VALUE="1"/>
+        <PARAMETER NAME="C_INTERCONNECT_S_AXI_MASTERS" VALUE="ps7_cortexa9_0.M_AXI_DP &amp; ps7_cortexa9_1.M_AXI_DP"/>
+        <PARAMETER NAME="C_S_AXI_BASEADDR" VALUE="0xE0000000"/>
+        <PARAMETER NAME="C_S_AXI_HIGHADDR" VALUE="0xE0000FFF"/>
+        <PARAMETER NAME="C_UART_CLK_FREQ_HZ" VALUE="50000000"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT CLKFREQUENCY="108333336" DIR="I" NAME="APER_CLK" SIGIS="CLK" SIGNAME="ps7_clockc_0_UART0_APER">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_clockc_0" PORT="UART0_APER"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="INTERRUPT" SENSITIVITY="LEVEL_HIGH" SIGIS="INTERRUPT"/>
+        <PORT DIR="O" IRQID="59" NAME="IRQ_UART0" SENSITIVITY="LEVEL_HIGH" SIGIS="INTERRUPT" SIGNAME="ps7_uart_0_IRQ_UART0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_scugic_0" PORT="IRQ_UART0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="50000000" DIR="I" NAME="REF_CLK" SIGIS="CLK" SIGNAME="ps7_clockc_0_UART0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_clockc_0" PORT="UART0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="50000000" DIR="I" NAME="S_AXI_ACLK" SIGIS="CLK" SIGNAME="ps7_axi_interconnect_0_M_AXI_ACLK">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_ACLK"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="S_AXI_ARADDR" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_ARADDR">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_ARADDR"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="S_AXI_ARESETN" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_ARESETN">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_ARESETN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="S_AXI_ARREADY" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_ARREADY">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_ARREADY"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="S_AXI_ARVALID" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_ARVALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_ARVALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="S_AXI_AWADDR" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_AWADDR">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_AWADDR"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="S_AXI_AWREADY" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_AWREADY">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_AWREADY"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="S_AXI_AWVALID" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_AWVALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_AWVALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="S_AXI_BREADY" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_BREADY">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_BREADY"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="S_AXI_BRESP" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_BRESP">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_BRESP"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="S_AXI_BVALID" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_BVALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_BVALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="S_AXI_RDATA" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_RDATA">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_RDATA"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="S_AXI_RREADY" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_RREADY">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_RREADY"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="S_AXI_RRESP" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_RRESP">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_RRESP"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="S_AXI_RVALID" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_RVALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_RVALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="S_AXI_WDATA" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_WDATA">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_WDATA"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="S_AXI_WREADY" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_WREADY">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_WREADY"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="S_AXI_WSTRB" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_WSTRB">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_WSTRB"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="S_AXI_WVALID" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_WVALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_axi_interconnect_0" PORT="M_AXI_WVALID"/>
+          </CONNECTIONS>
+        </PORT>
       </PORTS>
       <BUSINTERFACES>
         <BUSINTERFACE BUSNAME="ps7_axi_interconnect_0" NAME="S_AXI" TYPE="SLAVE">
@@ -5517,6 +5692,7 @@
         <PORT DIR="I" NAME="M_AXI_ACLK" SIGIS="CLK" SIGNAME="ps7_axi_interconnect_0_M_AXI_ACLK">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_clockc_0" PORT="S_AXI_ACLK"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="S_AXI_ACLK"/>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="S_AXI_ACLK"/>
             <CONNECTION INSTANCE="ps7_pl310_0" PORT="S_AXI_ACLK"/>
             <CONNECTION INSTANCE="ps7_pmu_0" PORT="S_AXI_ACLK"/>
@@ -5558,6 +5734,7 @@
         <PORT DIR="I" NAME="M_AXI_ARADDR" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_ARADDR">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_clockc_0" PORT="S_AXI_ARADDR"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="S_AXI_ARADDR"/>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="S_AXI_ARADDR"/>
             <CONNECTION INSTANCE="ps7_pl310_0" PORT="S_AXI_ARADDR"/>
             <CONNECTION INSTANCE="ps7_pmu_0" PORT="S_AXI_ARADDR"/>
@@ -5605,6 +5782,7 @@
         <PORT DIR="I" NAME="M_AXI_ARESETN" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_ARESETN">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_clockc_0" PORT="S_AXI_ARESETN"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="S_AXI_ARESETN"/>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="S_AXI_ARESETN"/>
             <CONNECTION INSTANCE="ps7_pl310_0" PORT="S_AXI_ARESETN"/>
             <CONNECTION INSTANCE="ps7_pmu_0" PORT="S_AXI_ARESETN"/>
@@ -5652,6 +5830,7 @@
         <PORT DIR="O" NAME="M_AXI_ARREADY" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_ARREADY">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_clockc_0" PORT="S_AXI_ARREADY"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="S_AXI_ARREADY"/>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="S_AXI_ARREADY"/>
             <CONNECTION INSTANCE="ps7_pl310_0" PORT="S_AXI_ARREADY"/>
             <CONNECTION INSTANCE="ps7_pmu_0" PORT="S_AXI_ARREADY"/>
@@ -5699,6 +5878,7 @@
         <PORT DIR="I" NAME="M_AXI_ARVALID" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_ARVALID">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_clockc_0" PORT="S_AXI_ARVALID"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="S_AXI_ARVALID"/>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="S_AXI_ARVALID"/>
             <CONNECTION INSTANCE="ps7_pl310_0" PORT="S_AXI_ARVALID"/>
             <CONNECTION INSTANCE="ps7_pmu_0" PORT="S_AXI_ARVALID"/>
@@ -5746,6 +5926,7 @@
         <PORT DIR="I" NAME="M_AXI_AWADDR" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_AWADDR">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_clockc_0" PORT="S_AXI_AWADDR"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="S_AXI_AWADDR"/>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="S_AXI_AWADDR"/>
             <CONNECTION INSTANCE="ps7_pl310_0" PORT="S_AXI_AWADDR"/>
             <CONNECTION INSTANCE="ps7_pmu_0" PORT="S_AXI_AWADDR"/>
@@ -5793,6 +5974,7 @@
         <PORT DIR="O" NAME="M_AXI_AWREADY" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_AWREADY">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_clockc_0" PORT="S_AXI_AWREADY"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="S_AXI_AWREADY"/>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="S_AXI_AWREADY"/>
             <CONNECTION INSTANCE="ps7_pl310_0" PORT="S_AXI_AWREADY"/>
             <CONNECTION INSTANCE="ps7_pmu_0" PORT="S_AXI_AWREADY"/>
@@ -5840,6 +6022,7 @@
         <PORT DIR="I" NAME="M_AXI_AWVALID" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_AWVALID">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_clockc_0" PORT="S_AXI_AWVALID"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="S_AXI_AWVALID"/>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="S_AXI_AWVALID"/>
             <CONNECTION INSTANCE="ps7_pl310_0" PORT="S_AXI_AWVALID"/>
             <CONNECTION INSTANCE="ps7_pmu_0" PORT="S_AXI_AWVALID"/>
@@ -5887,6 +6070,7 @@
         <PORT DIR="I" NAME="M_AXI_BREADY" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_BREADY">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_clockc_0" PORT="S_AXI_BREADY"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="S_AXI_BREADY"/>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="S_AXI_BREADY"/>
             <CONNECTION INSTANCE="ps7_pl310_0" PORT="S_AXI_BREADY"/>
             <CONNECTION INSTANCE="ps7_pmu_0" PORT="S_AXI_BREADY"/>
@@ -5934,6 +6118,7 @@
         <PORT DIR="O" NAME="M_AXI_BRESP" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_BRESP">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_clockc_0" PORT="S_AXI_BRESP"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="S_AXI_BRESP"/>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="S_AXI_BRESP"/>
             <CONNECTION INSTANCE="ps7_pl310_0" PORT="S_AXI_BRESP"/>
             <CONNECTION INSTANCE="ps7_pmu_0" PORT="S_AXI_BRESP"/>
@@ -5981,6 +6166,7 @@
         <PORT DIR="O" NAME="M_AXI_BVALID" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_BVALID">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_clockc_0" PORT="S_AXI_BVALID"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="S_AXI_BVALID"/>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="S_AXI_BVALID"/>
             <CONNECTION INSTANCE="ps7_pl310_0" PORT="S_AXI_BVALID"/>
             <CONNECTION INSTANCE="ps7_pmu_0" PORT="S_AXI_BVALID"/>
@@ -6028,6 +6214,7 @@
         <PORT DIR="O" NAME="M_AXI_RDATA" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_RDATA">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_clockc_0" PORT="S_AXI_RDATA"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="S_AXI_RDATA"/>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="S_AXI_RDATA"/>
             <CONNECTION INSTANCE="ps7_pl310_0" PORT="S_AXI_RDATA"/>
             <CONNECTION INSTANCE="ps7_pmu_0" PORT="S_AXI_RDATA"/>
@@ -6075,6 +6262,7 @@
         <PORT DIR="I" NAME="M_AXI_RREADY" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_RREADY">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_clockc_0" PORT="S_AXI_RREADY"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="S_AXI_RREADY"/>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="S_AXI_RREADY"/>
             <CONNECTION INSTANCE="ps7_pl310_0" PORT="S_AXI_RREADY"/>
             <CONNECTION INSTANCE="ps7_pmu_0" PORT="S_AXI_RREADY"/>
@@ -6122,6 +6310,7 @@
         <PORT DIR="O" NAME="M_AXI_RRESP" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_RRESP">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_clockc_0" PORT="S_AXI_RRESP"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="S_AXI_RRESP"/>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="S_AXI_RRESP"/>
             <CONNECTION INSTANCE="ps7_pl310_0" PORT="S_AXI_RRESP"/>
             <CONNECTION INSTANCE="ps7_pmu_0" PORT="S_AXI_RRESP"/>
@@ -6169,6 +6358,7 @@
         <PORT DIR="O" NAME="M_AXI_RVALID" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_RVALID">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_clockc_0" PORT="S_AXI_RVALID"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="S_AXI_RVALID"/>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="S_AXI_RVALID"/>
             <CONNECTION INSTANCE="ps7_pl310_0" PORT="S_AXI_RVALID"/>
             <CONNECTION INSTANCE="ps7_pmu_0" PORT="S_AXI_RVALID"/>
@@ -6216,6 +6406,7 @@
         <PORT DIR="I" NAME="M_AXI_WDATA" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_WDATA">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_clockc_0" PORT="S_AXI_WDATA"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="S_AXI_WDATA"/>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="S_AXI_WDATA"/>
             <CONNECTION INSTANCE="ps7_pl310_0" PORT="S_AXI_WDATA"/>
             <CONNECTION INSTANCE="ps7_pmu_0" PORT="S_AXI_WDATA"/>
@@ -6263,6 +6454,7 @@
         <PORT DIR="O" NAME="M_AXI_WREADY" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_WREADY">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_clockc_0" PORT="S_AXI_WREADY"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="S_AXI_WREADY"/>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="S_AXI_WREADY"/>
             <CONNECTION INSTANCE="ps7_pl310_0" PORT="S_AXI_WREADY"/>
             <CONNECTION INSTANCE="ps7_pmu_0" PORT="S_AXI_WREADY"/>
@@ -6310,6 +6502,7 @@
         <PORT DIR="I" NAME="M_AXI_WSTRB" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_WSTRB">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_clockc_0" PORT="S_AXI_WSTRB"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="S_AXI_WSTRB"/>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="S_AXI_WSTRB"/>
             <CONNECTION INSTANCE="ps7_pl310_0" PORT="S_AXI_WSTRB"/>
             <CONNECTION INSTANCE="ps7_pmu_0" PORT="S_AXI_WSTRB"/>
@@ -6357,6 +6550,7 @@
         <PORT DIR="I" NAME="M_AXI_WVALID" SIGIS="undef" SIGNAME="ps7_axi_interconnect_0_M_AXI_WVALID">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_clockc_0" PORT="S_AXI_WVALID"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="S_AXI_WVALID"/>
             <CONNECTION INSTANCE="ps7_uart_1" PORT="S_AXI_WVALID"/>
             <CONNECTION INSTANCE="ps7_pl310_0" PORT="S_AXI_WVALID"/>
             <CONNECTION INSTANCE="ps7_pmu_0" PORT="S_AXI_WVALID"/>
@@ -6854,6 +7048,7 @@
       <MEMORYMAP>
         <MEMRANGE BASENAME="C_S_AXI_BASEADDR" BASEVALUE="0x00000000" HIGHNAME="C_S_AXI_HIGHADDR" HIGHVALUE="0x0002FFFF" INSTANCE="ps7_ram_0" IS_DATA="TRUE" IS_INSTRUCTION="TRUE" MEMTYPE="MEMORY"/>
         <MEMRANGE BASENAME="C_S_AXI_BASEADDR" BASEVALUE="0x00100000" HIGHNAME="C_S_AXI_HIGHADDR" HIGHVALUE="0x1FFFFFFF" INSTANCE="ps7_ddr_0" IS_DATA="TRUE" IS_INSTRUCTION="TRUE" MEMTYPE="MEMORY"/>
+        <MEMRANGE BASENAME="C_S_AXI_BASEADDR" BASEVALUE="0xE0000000" HIGHNAME="C_S_AXI_HIGHADDR" HIGHVALUE="0xE0000FFF" INSTANCE="ps7_uart_0" IS_DATA="TRUE" IS_INSTRUCTION="TRUE" MEMTYPE="REGISTER"/>
         <MEMRANGE BASENAME="C_S_AXI_BASEADDR" BASEVALUE="0xE0001000" HIGHNAME="C_S_AXI_HIGHADDR" HIGHVALUE="0xE0001FFF" INSTANCE="ps7_uart_1" IS_DATA="TRUE" IS_INSTRUCTION="TRUE" MEMTYPE="REGISTER"/>
         <MEMRANGE BASENAME="C_S_AXI_BASEADDR" BASEVALUE="0xE0002000" HIGHNAME="C_S_AXI_HIGHADDR" HIGHVALUE="0xE0002FFF" INSTANCE="ps7_usb_0" IS_DATA="TRUE" IS_INSTRUCTION="TRUE" MEMTYPE="REGISTER"/>
         <MEMRANGE BASENAME="C_S_AXI_BASEADDR" BASEVALUE="0xE0004000" HIGHNAME="C_S_AXI_HIGHADDR" HIGHVALUE="0xE0004FFF" INSTANCE="ps7_i2c_0" IS_DATA="TRUE" IS_INSTRUCTION="TRUE" MEMTYPE="REGISTER"/>
@@ -6898,6 +7093,7 @@
       <PERIPHERALS>
         <PERIPHERAL INSTANCE="ps7_ram_0"/>
         <PERIPHERAL INSTANCE="ps7_ddr_0"/>
+        <PERIPHERAL INSTANCE="ps7_uart_0"/>
         <PERIPHERAL INSTANCE="ps7_uart_1"/>
         <PERIPHERAL INSTANCE="ps7_usb_0"/>
         <PERIPHERAL INSTANCE="ps7_i2c_0"/>
@@ -7093,6 +7289,7 @@
       <MEMORYMAP>
         <MEMRANGE BASENAME="C_S_AXI_BASEADDR" BASEVALUE="0x00000000" HIGHNAME="C_S_AXI_HIGHADDR" HIGHVALUE="0x0002FFFF" INSTANCE="ps7_ram_0" IS_DATA="TRUE" IS_INSTRUCTION="TRUE" MEMTYPE="MEMORY"/>
         <MEMRANGE BASENAME="C_S_AXI_BASEADDR" BASEVALUE="0x00100000" HIGHNAME="C_S_AXI_HIGHADDR" HIGHVALUE="0x1FFFFFFF" INSTANCE="ps7_ddr_0" IS_DATA="TRUE" IS_INSTRUCTION="TRUE" MEMTYPE="MEMORY"/>
+        <MEMRANGE BASENAME="C_S_AXI_BASEADDR" BASEVALUE="0xE0000000" HIGHNAME="C_S_AXI_HIGHADDR" HIGHVALUE="0xE0000FFF" INSTANCE="ps7_uart_0" IS_DATA="TRUE" IS_INSTRUCTION="TRUE" MEMTYPE="REGISTER"/>
         <MEMRANGE BASENAME="C_S_AXI_BASEADDR" BASEVALUE="0xE0001000" HIGHNAME="C_S_AXI_HIGHADDR" HIGHVALUE="0xE0001FFF" INSTANCE="ps7_uart_1" IS_DATA="TRUE" IS_INSTRUCTION="TRUE" MEMTYPE="REGISTER"/>
         <MEMRANGE BASENAME="C_S_AXI_BASEADDR" BASEVALUE="0xE0002000" HIGHNAME="C_S_AXI_HIGHADDR" HIGHVALUE="0xE0002FFF" INSTANCE="ps7_usb_0" IS_DATA="TRUE" IS_INSTRUCTION="TRUE" MEMTYPE="REGISTER"/>
         <MEMRANGE BASENAME="C_S_AXI_BASEADDR" BASEVALUE="0xE0004000" HIGHNAME="C_S_AXI_HIGHADDR" HIGHVALUE="0xE0004FFF" INSTANCE="ps7_i2c_0" IS_DATA="TRUE" IS_INSTRUCTION="TRUE" MEMTYPE="REGISTER"/>
@@ -7137,6 +7334,7 @@
       <PERIPHERALS>
         <PERIPHERAL INSTANCE="ps7_ram_0"/>
         <PERIPHERAL INSTANCE="ps7_ddr_0"/>
+        <PERIPHERAL INSTANCE="ps7_uart_0"/>
         <PERIPHERAL INSTANCE="ps7_uart_1"/>
         <PERIPHERAL INSTANCE="ps7_usb_0"/>
         <PERIPHERAL INSTANCE="ps7_i2c_0"/>
@@ -10295,6 +10493,12 @@
         <PORT DIR="I" IRQID="56" NAME="IRQ_SDIO0" SENSITIVITY="LEVEL_HIGH" SIGIS="INTERRUPT" SIGNAME="ps7_sd_0_IRQ_SDIO0">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_sd_0" PORT="IRQ_SDIO0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" IRQID="59" NAME="IRQ_UART0" SENSITIVITY="LEVEL_HIGH" SIGIS="INTERRUPT" SIGNAME="ps7_uart_0_IRQ_UART0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_clockc_0" PORT="IRQ_UART0"/>
+            <CONNECTION INSTANCE="ps7_uart_0" PORT="IRQ_UART0"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" IRQID="82" NAME="IRQ_UART1" SENSITIVITY="LEVEL_HIGH" SIGIS="INTERRUPT" SIGNAME="ps7_uart_1_IRQ_UART1">

@@ -8,6 +8,8 @@ set_property PACKAGE_PIN V13 [get_ports {PWM[4]}]
 set_property PACKAGE_PIN U17 [get_ports {PWM[5]}]
 set_property PACKAGE_PIN T17 [get_ports {PWM[6]}]
 set_property PACKAGE_PIN Y17 [get_ports {PWM[7]}]
+
+# PWM8-11 on PMOD HISPD (JB)
 set_property PACKAGE_PIN Y18 [get_ports {PWM[8]}]
 set_property PACKAGE_PIN Y19 [get_ports {PWM[9]}]
 set_property PACKAGE_PIN W18 [get_ports {PWM[10]}]
@@ -24,16 +26,16 @@ set_property IOSTANDARD LVCMOS33 [get_ports {RCVR_GND[0]}]
 # Primary serial (PORTA) in UART1 (MIO) - no constraints required
 
 # Telemetry serial (PORTB) on PMOD XADC (JA) but used in digital IO mode
-#set_property PACKAGE_PIN N15 [get_ports {PORTB_TX}]
-#set_property PACKAGE_PIN L14 [get_ports {PORTB_RX}]
-#set_property PACKAGE_PIN K16 [get_ports {PORTB_CTSN}]
-#set_property PACKAGE_PIN K14 [get_ports {PORTB_RTSN}]
-#set_property IOSTANDARD LVCMOS33 [get_ports {PORTB_TX}]
-#set_property IOSTANDARD LVCMOS33 [get_ports {PORTB_RX}]
-#set_property IOSTANDARD LVCMOS33 [get_ports {PORTB_CTSN}]
-#set_property IOSTANDARD LVCMOS33 [get_ports {PORTB_RTSN}]
+set_property PACKAGE_PIN N15 [get_ports {PORTB_TX}]
+set_property PACKAGE_PIN L14 [get_ports {PORTB_RX}]
+set_property PACKAGE_PIN K16 [get_ports {PORTB_CTSN}]
+set_property PACKAGE_PIN K14 [get_ports {PORTB_RTSN}]
+set_property IOSTANDARD LVCMOS33 [get_ports {PORTB_TX}]
+set_property IOSTANDARD LVCMOS33 [get_ports {PORTB_RX}]
+set_property IOSTANDARD LVCMOS33 [get_ports {PORTB_CTSN}]
+set_property IOSTANDARD LVCMOS33 [get_ports {PORTB_RTSN}]
 
-# GPS serial (PORTB) on PMOD XADC (JA) in digital IO mode
+# GPS serial (PORTC on PMOD XADC (JA) in digital IO mode
 #set_property PACKAGE_PIN N16 [get_ports {PORTC_txd}]
 #set_property PACKAGE_PIN L15 [get_ports {PORTC_rxd}]
 #set_property IOSTANDARD LVCMOS33 [get_ports {PORTC_txd}]

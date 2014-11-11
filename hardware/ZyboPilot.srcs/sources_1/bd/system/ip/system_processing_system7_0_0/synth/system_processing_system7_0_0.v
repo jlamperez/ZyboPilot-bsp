@@ -72,6 +72,14 @@ module system_processing_system7_0_0 (
   I2C0_SCL_O,
   I2C0_SCL_T,
   SDIO0_WP,
+  UART0_DTRN,
+  UART0_RTSN,
+  UART0_TX,
+  UART0_CTSN,
+  UART0_DCDN,
+  UART0_DSRN,
+  UART0_RIN,
+  UART0_RX,
   TTC0_WAVE0_OUT,
   TTC0_WAVE1_OUT,
   TTC0_WAVE2_OUT,
@@ -176,6 +184,22 @@ output wire I2C0_SCL_O;
 output wire I2C0_SCL_T;
 (* X_INTERFACE_INFO = "xilinx.com:interface:sdio:1.0 SDIO_0 WP" *)
 input wire SDIO0_WP;
+(* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 UART_0 DTRn" *)
+output wire UART0_DTRN;
+(* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 UART_0 RTSn" *)
+output wire UART0_RTSN;
+(* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 UART_0 TxD" *)
+output wire UART0_TX;
+(* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 UART_0 CTSn" *)
+input wire UART0_CTSN;
+(* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 UART_0 DCDn" *)
+input wire UART0_DCDN;
+(* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 UART_0 DSRn" *)
+input wire UART0_DSRN;
+(* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 UART_0 RI" *)
+input wire UART0_RIN;
+(* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 UART_0 RxD" *)
+input wire UART0_RX;
 output wire TTC0_WAVE0_OUT;
 output wire TTC0_WAVE1_OUT;
 output wire TTC0_WAVE2_OUT;
@@ -483,14 +507,14 @@ inout wire PS_PORB;
     .SPI1_SS1_O(),
     .SPI1_SS2_O(),
     .SPI1_SS_T(),
-    .UART0_DTRN(),
-    .UART0_RTSN(),
-    .UART0_TX(),
-    .UART0_CTSN(1'B0),
-    .UART0_DCDN(1'B0),
-    .UART0_DSRN(1'B0),
-    .UART0_RIN(1'B0),
-    .UART0_RX(1'B1),
+    .UART0_DTRN(UART0_DTRN),
+    .UART0_RTSN(UART0_RTSN),
+    .UART0_TX(UART0_TX),
+    .UART0_CTSN(UART0_CTSN),
+    .UART0_DCDN(UART0_DCDN),
+    .UART0_DSRN(UART0_DSRN),
+    .UART0_RIN(UART0_RIN),
+    .UART0_RX(UART0_RX),
     .UART1_DTRN(),
     .UART1_RTSN(),
     .UART1_TX(),

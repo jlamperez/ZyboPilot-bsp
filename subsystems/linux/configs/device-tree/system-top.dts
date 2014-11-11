@@ -4,6 +4,11 @@
 / {
 };
 
+/ { aliases {
+                serial1 = &ps7_uart_0;
+        };
+};
+
 &clkc {
 	ps-clk-frequency = <50000000>;
 };
