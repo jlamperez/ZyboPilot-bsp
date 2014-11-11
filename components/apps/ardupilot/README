@@ -1,0 +1,7 @@
+This is a trivial file-copy application template.
+
+It expects to find a freshly built ArduPlane.elf in /tmp/ArduPlane.
+
+We may fix this eventually
+
+

@@ -1,0 +1,38 @@
+/dts-v1/;
+/include/ "system-conf.dtsi"
+/include/ "pl.dtsi"
+/ {
+};
+
+&clkc {
+	ps-clk-frequency = <50000000>;
+};
+
+/* Override GIC - HSM fucks it up! */
+&ps7_scugic_0 {
+        reg = <0xF8F01000 4096 0xF8F00100 0x100>;
+} ;
+
+&flash0 {
+   compatible = "s25fl128s1";
+};
+
+&ps7_usb_0 {
+	dr_mode = "otg";
+} ;
+
+&ps7_ethernet_0 {
+	phy-handle = <&phy0>;
+	mdio {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		phy0: phy@1 {
+			compatible = "realtek,RTL8211E";
+			device_type = "ethernet-phy";
+			reg = <1>;
+		} ;
+	} ;
+} ;
+
+
+
