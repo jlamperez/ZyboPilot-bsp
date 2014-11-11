@@ -60,4 +60,17 @@
 			xlnx,tri-default = <0xFFFFFFFF>;
 			xlnx,tri-default-2 = <0xFFFFFFFF>;
 		} ;
+
+		servo_pwm_v1_0_0: servo_pwm@43c00000 {
+			compatible = "xlnx,servo_pwm-1.0";
+			reg = <0x43c00000 0x1000>;
+			clock-frequency = <100000000>;
+		};
+
+		axi_pulsetrain_in_0: pulsetrain_in@43c10000 {
+			compatible = "xlnx,axi-pulsetrain-in-1.0";
+			reg = <0x43c10000 0x1000>;
+			clock-frequency = <100000000>;
+		};
+
 	} ;

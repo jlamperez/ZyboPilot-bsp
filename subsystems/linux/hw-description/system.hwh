@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Tue Nov 11 14:05:12 2014" VIVADOVERSION="2014.3">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Tue Nov 11 15:28:59 2014" VIVADOVERSION="2014.3">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z010" NAME="system_imp" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -34,6 +34,21 @@
     <PORT DIR="O" NAME="IIC_0_scl_t" SIGIS="undef"/>
     <PORT DIR="O" LEFT="3" NAME="LEDs_4Bits_tri_o" RIGHT="0" SIGIS="undef"/>
     <PORT DIR="I" LEFT="3" NAME="SWs_4Bits_tri_i" RIGHT="0" SIGIS="undef"/>
+    <PORT DIR="O" LEFT="11" NAME="PWM" RIGHT="0" SIGIS="undef" SIGNAME="servo_pwm_v1_0_0_PWM">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="PWM"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="RCVR_IN" SIGIS="undef" SIGNAME="External_Ports_RCVR_IN">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="pulsetrain_in"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="0" NAME="RCVR_GND" RIGHT="0" SIGIS="undef" SIGNAME="xlconstant_0_dout">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="xlconstant_0" PORT="dout"/>
+      </CONNECTIONS>
+    </PORT>
   </EXTERNALPORTS>
 
   <MODULES>
@@ -502,6 +517,154 @@
         </BUSINTERFACE>
       </BUSINTERFACES>
     </MODULE>
+    <MODULE FULLNAME="/axi_pulsetrain_in_0" HWVERSION="1.0" INSTANCE="axi_pulsetrain_in_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="axi_pulsetrain_in" VLNV="dronecode:zynq:axi_pulsetrain_in:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="C_S00_AXI_DATA_WIDTH" VALUE="32"/>
+        <PARAMETER NAME="C_S00_AXI_ADDR_WIDTH" VALUE="4"/>
+        <PARAMETER NAME="Component_Name" VALUE="system_axi_pulsetrain_in_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+        <PARAMETER NAME="C_S00_AXI_BASEADDR" VALUE="0x43C10000"/>
+        <PARAMETER NAME="C_S00_AXI_HIGHADDR" VALUE="0x43C1FFFF"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="pulsetrain_in" SIGIS="undef" SIGNAME="External_Ports_RCVR_IN">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RCVR_IN"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="3" NAME="s00_axi_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_awaddr">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="m_axi_awaddr"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="2" NAME="s00_axi_awprot" RIGHT="0" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_awprot">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="m_axi_awprot"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s00_axi_awvalid" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_awvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="m_axi_awvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s00_axi_awready" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_awready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="m_axi_awready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="31" NAME="s00_axi_wdata" RIGHT="0" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_wdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="m_axi_wdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="3" NAME="s00_axi_wstrb" RIGHT="0" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_wstrb">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="m_axi_wstrb"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s00_axi_wvalid" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_wvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="m_axi_wvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s00_axi_wready" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_wready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="m_axi_wready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="1" NAME="s00_axi_bresp" RIGHT="0" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_bresp">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="m_axi_bresp"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s00_axi_bvalid" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_bvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="m_axi_bvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s00_axi_bready" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_bready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="m_axi_bready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="3" NAME="s00_axi_araddr" RIGHT="0" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_araddr">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="m_axi_araddr"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="2" NAME="s00_axi_arprot" RIGHT="0" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_arprot">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="m_axi_arprot"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s00_axi_arvalid" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_arvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="m_axi_arvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s00_axi_arready" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_arready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="m_axi_arready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="31" NAME="s00_axi_rdata" RIGHT="0" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_rdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="m_axi_rdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="1" NAME="s00_axi_rresp" RIGHT="0" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_rresp">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="m_axi_rresp"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s00_axi_rvalid" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_rvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="m_axi_rvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s00_axi_rready" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_rready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="m_axi_rready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="s00_axi_aclk" SIGIS="clk" SIGNAME="processing_system7_0_FCLK_CLK0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_clockc_0" PORT="FCLK0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s00_axi_aresetn" SIGIS="rst" SIGNAME="proc_sys_reset_0_peripheral_aresetn">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="proc_sys_reset_0" PORT="peripheral_aresetn"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES>
+        <BUSINTERFACE BUSNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_M_AXI" NAME="S00_AXI" TYPE="SLAVE">
+          <PORTMAPS>
+            <PORTMAP PHYSICAL="s00_axi_awaddr"/>
+            <PORTMAP PHYSICAL="s00_axi_awprot"/>
+            <PORTMAP PHYSICAL="s00_axi_awvalid"/>
+            <PORTMAP PHYSICAL="s00_axi_awready"/>
+            <PORTMAP PHYSICAL="s00_axi_wdata"/>
+            <PORTMAP PHYSICAL="s00_axi_wstrb"/>
+            <PORTMAP PHYSICAL="s00_axi_wvalid"/>
+            <PORTMAP PHYSICAL="s00_axi_wready"/>
+            <PORTMAP PHYSICAL="s00_axi_bresp"/>
+            <PORTMAP PHYSICAL="s00_axi_bvalid"/>
+            <PORTMAP PHYSICAL="s00_axi_bready"/>
+            <PORTMAP PHYSICAL="s00_axi_araddr"/>
+            <PORTMAP PHYSICAL="s00_axi_arprot"/>
+            <PORTMAP PHYSICAL="s00_axi_arvalid"/>
+            <PORTMAP PHYSICAL="s00_axi_arready"/>
+            <PORTMAP PHYSICAL="s00_axi_rdata"/>
+            <PORTMAP PHYSICAL="s00_axi_rresp"/>
+            <PORTMAP PHYSICAL="s00_axi_rvalid"/>
+            <PORTMAP PHYSICAL="s00_axi_rready"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+      </BUSINTERFACES>
+    </MODULE>
     <MODULE FULLNAME="/ground" HWVERSION="1.1" INSTANCE="ground" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
       <DOCUMENTS/>
       <PARAMETERS>
@@ -569,6 +732,10 @@
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="aresetn"/>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m01_couplers_m01_regslice" PORT="aresetn"/>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="aresetn"/>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="aresetn"/>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_aresetn"/>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_aresetn"/>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="aresetn"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -1420,6 +1587,586 @@
         </BUSINTERFACE>
       </BUSINTERFACES>
     </MODULE>
+    <MODULE FULLNAME="/processing_system7_0_axi_periph/m03_couplers/m03_regslice" HWVERSION="2.1" INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" IPTYPE="BUS" IS_ENABLE="1" MODCLASS="BUS" MODTYPE="axi_register_slice" VLNV="xilinx.com:ip:axi_register_slice:2.1">
+      <DOCUMENTS>
+        <DOCUMENT SOURCE="http://www.xilinx.com/cgi-bin/docs/ipdoc?c=axi_interconnect;v=v2_1;d=pg059-axi-interconnect.pdf"/>
+      </DOCUMENTS>
+      <PARAMETERS>
+        <PARAMETER NAME="C_FAMILY" VALUE="zynq"/>
+        <PARAMETER NAME="C_AXI_PROTOCOL" VALUE="2"/>
+        <PARAMETER NAME="C_AXI_ID_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="C_AXI_ADDR_WIDTH" VALUE="32"/>
+        <PARAMETER NAME="C_AXI_DATA_WIDTH" VALUE="32"/>
+        <PARAMETER NAME="C_AXI_SUPPORTS_USER_SIGNALS" VALUE="0"/>
+        <PARAMETER NAME="C_AXI_AWUSER_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="C_AXI_ARUSER_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="C_AXI_WUSER_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="C_AXI_RUSER_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="C_AXI_BUSER_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="C_REG_CONFIG_AW" VALUE="7"/>
+        <PARAMETER NAME="C_REG_CONFIG_W" VALUE="7"/>
+        <PARAMETER NAME="C_REG_CONFIG_B" VALUE="7"/>
+        <PARAMETER NAME="C_REG_CONFIG_AR" VALUE="7"/>
+        <PARAMETER NAME="C_REG_CONFIG_R" VALUE="7"/>
+        <PARAMETER NAME="PROTOCOL" VALUE="AXI4LITE"/>
+        <PARAMETER NAME="READ_WRITE_MODE" VALUE="READ_WRITE"/>
+        <PARAMETER NAME="ADDR_WIDTH" VALUE="32"/>
+        <PARAMETER NAME="DATA_WIDTH" VALUE="32"/>
+        <PARAMETER NAME="ID_WIDTH" VALUE="0"/>
+        <PARAMETER NAME="AWUSER_WIDTH" VALUE="0"/>
+        <PARAMETER NAME="ARUSER_WIDTH" VALUE="0"/>
+        <PARAMETER NAME="RUSER_WIDTH" VALUE="0"/>
+        <PARAMETER NAME="WUSER_WIDTH" VALUE="0"/>
+        <PARAMETER NAME="BUSER_WIDTH" VALUE="0"/>
+        <PARAMETER NAME="REG_AW" VALUE="7"/>
+        <PARAMETER NAME="REG_AR" VALUE="7"/>
+        <PARAMETER NAME="REG_R" VALUE="7"/>
+        <PARAMETER NAME="REG_W" VALUE="7"/>
+        <PARAMETER NAME="REG_B" VALUE="7"/>
+        <PARAMETER NAME="Component_Name" VALUE="system_m03_regslice_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="BUS"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="aclk" SIGIS="clk" SIGNAME="processing_system7_0_FCLK_CLK0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_clockc_0" PORT="FCLK0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="aresetn" SIGIS="rst" SIGNAME="proc_sys_reset_0_peripheral_aresetn">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="proc_sys_reset_0" PORT="peripheral_aresetn"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="31" NAME="s_axi_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_s_axi_awaddr">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_awaddr"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="2" NAME="s_axi_awprot" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_s_axi_awprot">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_awprot"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_axi_awvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_s_axi_awvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_awvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s_axi_awready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_s_axi_awready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_awready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="31" NAME="s_axi_wdata" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_s_axi_wdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_wdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="3" NAME="s_axi_wstrb" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_s_axi_wstrb">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_wstrb"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_axi_wvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_s_axi_wvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_wvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s_axi_wready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_s_axi_wready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_wready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="1" NAME="s_axi_bresp" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_s_axi_bresp">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_bresp"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s_axi_bvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_s_axi_bvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_bvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_axi_bready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_s_axi_bready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_bready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="31" NAME="s_axi_araddr" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_s_axi_araddr">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_araddr"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="2" NAME="s_axi_arprot" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_s_axi_arprot">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_arprot"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_axi_arvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_s_axi_arvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_arvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s_axi_arready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_s_axi_arready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_arready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="31" NAME="s_axi_rdata" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_s_axi_rdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_rdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="1" NAME="s_axi_rresp" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_s_axi_rresp">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_rresp"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s_axi_rvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_s_axi_rvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_rvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_axi_rready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_s_axi_rready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_rready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="31" NAME="m_axi_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_awaddr">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_awaddr"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="2" NAME="m_axi_awprot" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_awprot">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_awprot"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="m_axi_awvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_awvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_awvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="m_axi_awready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_awready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_awready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="31" NAME="m_axi_wdata" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_wdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_wdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="3" NAME="m_axi_wstrb" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_wstrb">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_wstrb"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="m_axi_wvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_wvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_wvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="m_axi_wready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_wready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_wready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="1" NAME="m_axi_bresp" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_bresp">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_bresp"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="m_axi_bvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_bvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_bvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="m_axi_bready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_bready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_bready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="31" NAME="m_axi_araddr" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_araddr">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_araddr"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="2" NAME="m_axi_arprot" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_arprot">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_arprot"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="m_axi_arvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_arvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_arvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="m_axi_arready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_arready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_arready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="31" NAME="m_axi_rdata" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_rdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_rdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="1" NAME="m_axi_rresp" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_rresp">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_rresp"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="m_axi_rvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_rvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_rvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="m_axi_rready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_rready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_rready"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES>
+        <BUSINTERFACE BUSNAME="processing_system7_0_axi_periph_xbar_M03_AXI" NAME="S_AXI" TYPE="SLAVE">
+          <PORTMAPS>
+            <PORTMAP PHYSICAL="s_axi_awaddr"/>
+            <PORTMAP PHYSICAL="s_axi_awprot"/>
+            <PORTMAP PHYSICAL="s_axi_awvalid"/>
+            <PORTMAP PHYSICAL="s_axi_awready"/>
+            <PORTMAP PHYSICAL="s_axi_wdata"/>
+            <PORTMAP PHYSICAL="s_axi_wstrb"/>
+            <PORTMAP PHYSICAL="s_axi_wvalid"/>
+            <PORTMAP PHYSICAL="s_axi_wready"/>
+            <PORTMAP PHYSICAL="s_axi_bresp"/>
+            <PORTMAP PHYSICAL="s_axi_bvalid"/>
+            <PORTMAP PHYSICAL="s_axi_bready"/>
+            <PORTMAP PHYSICAL="s_axi_araddr"/>
+            <PORTMAP PHYSICAL="s_axi_arprot"/>
+            <PORTMAP PHYSICAL="s_axi_arvalid"/>
+            <PORTMAP PHYSICAL="s_axi_arready"/>
+            <PORTMAP PHYSICAL="s_axi_rdata"/>
+            <PORTMAP PHYSICAL="s_axi_rresp"/>
+            <PORTMAP PHYSICAL="s_axi_rvalid"/>
+            <PORTMAP PHYSICAL="s_axi_rready"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+        <BUSINTERFACE BUSNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_M_AXI" NAME="M_AXI" TYPE="MASTER">
+          <PORTMAPS>
+            <PORTMAP PHYSICAL="m_axi_awaddr"/>
+            <PORTMAP PHYSICAL="m_axi_awprot"/>
+            <PORTMAP PHYSICAL="m_axi_awvalid"/>
+            <PORTMAP PHYSICAL="m_axi_awready"/>
+            <PORTMAP PHYSICAL="m_axi_wdata"/>
+            <PORTMAP PHYSICAL="m_axi_wstrb"/>
+            <PORTMAP PHYSICAL="m_axi_wvalid"/>
+            <PORTMAP PHYSICAL="m_axi_wready"/>
+            <PORTMAP PHYSICAL="m_axi_bresp"/>
+            <PORTMAP PHYSICAL="m_axi_bvalid"/>
+            <PORTMAP PHYSICAL="m_axi_bready"/>
+            <PORTMAP PHYSICAL="m_axi_araddr"/>
+            <PORTMAP PHYSICAL="m_axi_arprot"/>
+            <PORTMAP PHYSICAL="m_axi_arvalid"/>
+            <PORTMAP PHYSICAL="m_axi_arready"/>
+            <PORTMAP PHYSICAL="m_axi_rdata"/>
+            <PORTMAP PHYSICAL="m_axi_rresp"/>
+            <PORTMAP PHYSICAL="m_axi_rvalid"/>
+            <PORTMAP PHYSICAL="m_axi_rready"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+      </BUSINTERFACES>
+    </MODULE>
+    <MODULE FULLNAME="/processing_system7_0_axi_periph/m04_couplers/m04_regslice" HWVERSION="2.1" INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" IPTYPE="BUS" IS_ENABLE="1" MODCLASS="BUS" MODTYPE="axi_register_slice" VLNV="xilinx.com:ip:axi_register_slice:2.1">
+      <DOCUMENTS>
+        <DOCUMENT SOURCE="http://www.xilinx.com/cgi-bin/docs/ipdoc?c=axi_interconnect;v=v2_1;d=pg059-axi-interconnect.pdf"/>
+      </DOCUMENTS>
+      <PARAMETERS>
+        <PARAMETER NAME="C_FAMILY" VALUE="zynq"/>
+        <PARAMETER NAME="C_AXI_PROTOCOL" VALUE="2"/>
+        <PARAMETER NAME="C_AXI_ID_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="C_AXI_ADDR_WIDTH" VALUE="32"/>
+        <PARAMETER NAME="C_AXI_DATA_WIDTH" VALUE="32"/>
+        <PARAMETER NAME="C_AXI_SUPPORTS_USER_SIGNALS" VALUE="0"/>
+        <PARAMETER NAME="C_AXI_AWUSER_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="C_AXI_ARUSER_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="C_AXI_WUSER_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="C_AXI_RUSER_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="C_AXI_BUSER_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="C_REG_CONFIG_AW" VALUE="7"/>
+        <PARAMETER NAME="C_REG_CONFIG_W" VALUE="7"/>
+        <PARAMETER NAME="C_REG_CONFIG_B" VALUE="7"/>
+        <PARAMETER NAME="C_REG_CONFIG_AR" VALUE="7"/>
+        <PARAMETER NAME="C_REG_CONFIG_R" VALUE="7"/>
+        <PARAMETER NAME="PROTOCOL" VALUE="AXI4LITE"/>
+        <PARAMETER NAME="READ_WRITE_MODE" VALUE="READ_WRITE"/>
+        <PARAMETER NAME="ADDR_WIDTH" VALUE="32"/>
+        <PARAMETER NAME="DATA_WIDTH" VALUE="32"/>
+        <PARAMETER NAME="ID_WIDTH" VALUE="0"/>
+        <PARAMETER NAME="AWUSER_WIDTH" VALUE="0"/>
+        <PARAMETER NAME="ARUSER_WIDTH" VALUE="0"/>
+        <PARAMETER NAME="RUSER_WIDTH" VALUE="0"/>
+        <PARAMETER NAME="WUSER_WIDTH" VALUE="0"/>
+        <PARAMETER NAME="BUSER_WIDTH" VALUE="0"/>
+        <PARAMETER NAME="REG_AW" VALUE="7"/>
+        <PARAMETER NAME="REG_AR" VALUE="7"/>
+        <PARAMETER NAME="REG_R" VALUE="7"/>
+        <PARAMETER NAME="REG_W" VALUE="7"/>
+        <PARAMETER NAME="REG_B" VALUE="7"/>
+        <PARAMETER NAME="Component_Name" VALUE="system_m04_regslice_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="BUS"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="aclk" SIGIS="clk" SIGNAME="processing_system7_0_FCLK_CLK0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_clockc_0" PORT="FCLK0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="aresetn" SIGIS="rst" SIGNAME="proc_sys_reset_0_peripheral_aresetn">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="proc_sys_reset_0" PORT="peripheral_aresetn"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="31" NAME="s_axi_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_awaddr">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_awaddr"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="2" NAME="s_axi_awprot" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_awprot">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_awprot"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_axi_awvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_awvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_awvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s_axi_awready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_awready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_awready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="31" NAME="s_axi_wdata" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_wdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_wdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="3" NAME="s_axi_wstrb" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_wstrb">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_wstrb"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_axi_wvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_wvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_wvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s_axi_wready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_wready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_wready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="1" NAME="s_axi_bresp" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_bresp">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_bresp"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s_axi_bvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_bvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_bvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_axi_bready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_bready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_bready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="31" NAME="s_axi_araddr" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_araddr">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_araddr"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="2" NAME="s_axi_arprot" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_arprot">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_arprot"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_axi_arvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_arvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_arvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s_axi_arready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_arready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_arready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="31" NAME="s_axi_rdata" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_rdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_rdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="1" NAME="s_axi_rresp" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_rresp">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_rresp"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s_axi_rvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_rvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_rvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s_axi_rready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_rready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_xbar" PORT="m_axi_rready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="31" NAME="m_axi_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_awaddr">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_awaddr"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="2" NAME="m_axi_awprot" RIGHT="0" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_awprot">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_awprot"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="m_axi_awvalid" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_awvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_awvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="m_axi_awready" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_awready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_awready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="31" NAME="m_axi_wdata" RIGHT="0" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_wdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_wdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="3" NAME="m_axi_wstrb" RIGHT="0" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_wstrb">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_wstrb"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="m_axi_wvalid" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_wvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_wvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="m_axi_wready" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_wready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_wready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="1" NAME="m_axi_bresp" RIGHT="0" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_bresp">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_bresp"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="m_axi_bvalid" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_bvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_bvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="m_axi_bready" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_bready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_bready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="31" NAME="m_axi_araddr" RIGHT="0" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_araddr">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_araddr"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="2" NAME="m_axi_arprot" RIGHT="0" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_arprot">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_arprot"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="m_axi_arvalid" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_arvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_arvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="m_axi_arready" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_arready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_arready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="31" NAME="m_axi_rdata" RIGHT="0" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_rdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_rdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="1" NAME="m_axi_rresp" RIGHT="0" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_rresp">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_rresp"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="m_axi_rvalid" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_rvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_rvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="m_axi_rready" SIGIS="undef" SIGNAME="axi_pulsetrain_in_0_s00_axi_rready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_rready"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES>
+        <BUSINTERFACE BUSNAME="processing_system7_0_axi_periph_xbar_M04_AXI" NAME="S_AXI" TYPE="SLAVE">
+          <PORTMAPS>
+            <PORTMAP PHYSICAL="s_axi_awaddr"/>
+            <PORTMAP PHYSICAL="s_axi_awprot"/>
+            <PORTMAP PHYSICAL="s_axi_awvalid"/>
+            <PORTMAP PHYSICAL="s_axi_awready"/>
+            <PORTMAP PHYSICAL="s_axi_wdata"/>
+            <PORTMAP PHYSICAL="s_axi_wstrb"/>
+            <PORTMAP PHYSICAL="s_axi_wvalid"/>
+            <PORTMAP PHYSICAL="s_axi_wready"/>
+            <PORTMAP PHYSICAL="s_axi_bresp"/>
+            <PORTMAP PHYSICAL="s_axi_bvalid"/>
+            <PORTMAP PHYSICAL="s_axi_bready"/>
+            <PORTMAP PHYSICAL="s_axi_araddr"/>
+            <PORTMAP PHYSICAL="s_axi_arprot"/>
+            <PORTMAP PHYSICAL="s_axi_arvalid"/>
+            <PORTMAP PHYSICAL="s_axi_arready"/>
+            <PORTMAP PHYSICAL="s_axi_rdata"/>
+            <PORTMAP PHYSICAL="s_axi_rresp"/>
+            <PORTMAP PHYSICAL="s_axi_rvalid"/>
+            <PORTMAP PHYSICAL="s_axi_rready"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+        <BUSINTERFACE BUSNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_M_AXI" NAME="M_AXI" TYPE="MASTER">
+          <PORTMAPS>
+            <PORTMAP PHYSICAL="m_axi_awaddr"/>
+            <PORTMAP PHYSICAL="m_axi_awprot"/>
+            <PORTMAP PHYSICAL="m_axi_awvalid"/>
+            <PORTMAP PHYSICAL="m_axi_awready"/>
+            <PORTMAP PHYSICAL="m_axi_wdata"/>
+            <PORTMAP PHYSICAL="m_axi_wstrb"/>
+            <PORTMAP PHYSICAL="m_axi_wvalid"/>
+            <PORTMAP PHYSICAL="m_axi_wready"/>
+            <PORTMAP PHYSICAL="m_axi_bresp"/>
+            <PORTMAP PHYSICAL="m_axi_bvalid"/>
+            <PORTMAP PHYSICAL="m_axi_bready"/>
+            <PORTMAP PHYSICAL="m_axi_araddr"/>
+            <PORTMAP PHYSICAL="m_axi_arprot"/>
+            <PORTMAP PHYSICAL="m_axi_arvalid"/>
+            <PORTMAP PHYSICAL="m_axi_arready"/>
+            <PORTMAP PHYSICAL="m_axi_rdata"/>
+            <PORTMAP PHYSICAL="m_axi_rresp"/>
+            <PORTMAP PHYSICAL="m_axi_rvalid"/>
+            <PORTMAP PHYSICAL="m_axi_rready"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+      </BUSINTERFACES>
+    </MODULE>
     <MODULE FULLNAME="/processing_system7_0_axi_periph/s00_couplers/auto_pc" HWVERSION="2.1" INSTANCE="processing_system7_0_axi_periph_s00_couplers_auto_pc" IPTYPE="BUS" IS_ENABLE="1" MODCLASS="BUS" MODTYPE="axi_protocol_converter" VLNV="xilinx.com:ip:axi_protocol_converter:2.1">
       <DOCUMENTS>
         <DOCUMENT SOURCE="http://www.xilinx.com/cgi-bin/docs/ipdoc?c=axi_interconnect;v=v2_1;d=pg059-axi-interconnect.pdf"/>
@@ -1828,14 +2575,14 @@
       <PARAMETERS>
         <PARAMETER NAME="C_FAMILY" VALUE="zynq"/>
         <PARAMETER NAME="C_NUM_SLAVE_SLOTS" VALUE="1"/>
-        <PARAMETER NAME="C_NUM_MASTER_SLOTS" VALUE="3"/>
+        <PARAMETER NAME="C_NUM_MASTER_SLOTS" VALUE="5"/>
         <PARAMETER NAME="C_AXI_ID_WIDTH" VALUE="1"/>
         <PARAMETER NAME="C_AXI_ADDR_WIDTH" VALUE="32"/>
         <PARAMETER NAME="C_AXI_DATA_WIDTH" VALUE="32"/>
         <PARAMETER NAME="C_AXI_PROTOCOL" VALUE="2"/>
         <PARAMETER NAME="C_NUM_ADDR_RANGES" VALUE="1"/>
-        <PARAMETER NAME="C_M_AXI_BASE_ADDR" VALUE="0x000000004120000000000000412100000000000041220000"/>
-        <PARAMETER NAME="C_M_AXI_ADDR_WIDTH" VALUE="0x000000100000001000000010"/>
+        <PARAMETER NAME="C_M_AXI_BASE_ADDR" VALUE="0x0000000043c100000000000043c00000000000004120000000000000412100000000000041220000"/>
+        <PARAMETER NAME="C_M_AXI_ADDR_WIDTH" VALUE="0x0000001000000010000000100000001000000010"/>
         <PARAMETER NAME="C_S_AXI_BASE_ID" VALUE="0x00000000"/>
         <PARAMETER NAME="C_S_AXI_THREAD_ID_WIDTH" VALUE="0x0000000c"/>
         <PARAMETER NAME="C_AXI_SUPPORTS_USER_SIGNALS" VALUE="0"/>
@@ -1844,20 +2591,20 @@
         <PARAMETER NAME="C_AXI_WUSER_WIDTH" VALUE="1"/>
         <PARAMETER NAME="C_AXI_RUSER_WIDTH" VALUE="1"/>
         <PARAMETER NAME="C_AXI_BUSER_WIDTH" VALUE="1"/>
-        <PARAMETER NAME="C_M_AXI_WRITE_CONNECTIVITY" VALUE="0x000000010000000100000001"/>
-        <PARAMETER NAME="C_M_AXI_READ_CONNECTIVITY" VALUE="0x000000010000000100000001"/>
+        <PARAMETER NAME="C_M_AXI_WRITE_CONNECTIVITY" VALUE="0x0000000100000001000000010000000100000001"/>
+        <PARAMETER NAME="C_M_AXI_READ_CONNECTIVITY" VALUE="0x0000000100000001000000010000000100000001"/>
         <PARAMETER NAME="C_R_REGISTER" VALUE="0"/>
         <PARAMETER NAME="C_S_AXI_SINGLE_THREAD" VALUE="0x00000001"/>
         <PARAMETER NAME="C_S_AXI_WRITE_ACCEPTANCE" VALUE="0x00000001"/>
         <PARAMETER NAME="C_S_AXI_READ_ACCEPTANCE" VALUE="0x00000001"/>
-        <PARAMETER NAME="C_M_AXI_WRITE_ISSUING" VALUE="0x000000010000000100000001"/>
-        <PARAMETER NAME="C_M_AXI_READ_ISSUING" VALUE="0x000000010000000100000001"/>
+        <PARAMETER NAME="C_M_AXI_WRITE_ISSUING" VALUE="0x0000000100000001000000010000000100000001"/>
+        <PARAMETER NAME="C_M_AXI_READ_ISSUING" VALUE="0x0000000100000001000000010000000100000001"/>
         <PARAMETER NAME="C_S_AXI_ARB_PRIORITY" VALUE="0x00000000"/>
-        <PARAMETER NAME="C_M_AXI_SECURE" VALUE="0x000000000000000000000000"/>
+        <PARAMETER NAME="C_M_AXI_SECURE" VALUE="0x0000000000000000000000000000000000000000"/>
         <PARAMETER NAME="C_CONNECTIVITY_MODE" VALUE="0"/>
         <PARAMETER NAME="ADDR_RANGES" VALUE="1"/>
         <PARAMETER NAME="NUM_SI" VALUE="1"/>
-        <PARAMETER NAME="NUM_MI" VALUE="3"/>
+        <PARAMETER NAME="NUM_MI" VALUE="5"/>
         <PARAMETER NAME="ADDR_WIDTH" VALUE="32"/>
         <PARAMETER NAME="STRATEGY" VALUE="1"/>
         <PARAMETER NAME="PROTOCOL" VALUE="AXI4LITE"/>
@@ -2590,7 +3337,7 @@
         <PARAMETER NAME="M02_A13_BASE_ADDR" VALUE="0xffffffffffffffff"/>
         <PARAMETER NAME="M02_A14_BASE_ADDR" VALUE="0xffffffffffffffff"/>
         <PARAMETER NAME="M02_A15_BASE_ADDR" VALUE="0xffffffffffffffff"/>
-        <PARAMETER NAME="M03_A00_BASE_ADDR" VALUE="0xffffffffffffffff"/>
+        <PARAMETER NAME="M03_A00_BASE_ADDR" VALUE="0x0000000043C00000"/>
         <PARAMETER NAME="M03_A01_BASE_ADDR" VALUE="0xffffffffffffffff"/>
         <PARAMETER NAME="M03_A02_BASE_ADDR" VALUE="0xffffffffffffffff"/>
         <PARAMETER NAME="M03_A03_BASE_ADDR" VALUE="0xffffffffffffffff"/>
@@ -2606,7 +3353,7 @@
         <PARAMETER NAME="M03_A13_BASE_ADDR" VALUE="0xffffffffffffffff"/>
         <PARAMETER NAME="M03_A14_BASE_ADDR" VALUE="0xffffffffffffffff"/>
         <PARAMETER NAME="M03_A15_BASE_ADDR" VALUE="0xffffffffffffffff"/>
-        <PARAMETER NAME="M04_A00_BASE_ADDR" VALUE="0xffffffffffffffff"/>
+        <PARAMETER NAME="M04_A00_BASE_ADDR" VALUE="0x0000000043C10000"/>
         <PARAMETER NAME="M04_A01_BASE_ADDR" VALUE="0xffffffffffffffff"/>
         <PARAMETER NAME="M04_A02_BASE_ADDR" VALUE="0xffffffffffffffff"/>
         <PARAMETER NAME="M04_A03_BASE_ADDR" VALUE="0xffffffffffffffff"/>
@@ -2846,7 +3593,7 @@
         <PARAMETER NAME="M02_A13_ADDR_WIDTH" VALUE="0"/>
         <PARAMETER NAME="M02_A14_ADDR_WIDTH" VALUE="0"/>
         <PARAMETER NAME="M02_A15_ADDR_WIDTH" VALUE="0"/>
-        <PARAMETER NAME="M03_A00_ADDR_WIDTH" VALUE="0"/>
+        <PARAMETER NAME="M03_A00_ADDR_WIDTH" VALUE="16"/>
         <PARAMETER NAME="M03_A01_ADDR_WIDTH" VALUE="0"/>
         <PARAMETER NAME="M03_A02_ADDR_WIDTH" VALUE="0"/>
         <PARAMETER NAME="M03_A03_ADDR_WIDTH" VALUE="0"/>
@@ -2862,7 +3609,7 @@
         <PARAMETER NAME="M03_A13_ADDR_WIDTH" VALUE="0"/>
         <PARAMETER NAME="M03_A14_ADDR_WIDTH" VALUE="0"/>
         <PARAMETER NAME="M03_A15_ADDR_WIDTH" VALUE="0"/>
-        <PARAMETER NAME="M04_A00_ADDR_WIDTH" VALUE="0"/>
+        <PARAMETER NAME="M04_A00_ADDR_WIDTH" VALUE="16"/>
         <PARAMETER NAME="M04_A01_ADDR_WIDTH" VALUE="0"/>
         <PARAMETER NAME="M04_A02_ADDR_WIDTH" VALUE="0"/>
         <PARAMETER NAME="M04_A03_ADDR_WIDTH" VALUE="0"/>
@@ -3163,7 +3910,7 @@
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_s00_couplers_auto_pc" PORT="m_axi_rready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="95" NAME="m_axi_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m02_couplers_m02_regslice_s_axi_awaddr">
+        <PORT DIR="O" LEFT="159" NAME="m_axi_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_awaddr">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="s_axi_awaddr"/>
           </CONNECTIONS>
@@ -3173,8 +3920,14 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="s_axi_awaddr"/>
           </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="s_axi_awaddr"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="s_axi_awaddr"/>
+          </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="8" NAME="m_axi_awprot" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m02_couplers_m02_regslice_s_axi_awprot">
+        <PORT DIR="O" LEFT="14" NAME="m_axi_awprot" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_awprot">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="s_axi_awprot"/>
           </CONNECTIONS>
@@ -3184,8 +3937,14 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="s_axi_awprot"/>
           </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="s_axi_awprot"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="s_axi_awprot"/>
+          </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="2" NAME="m_axi_awvalid" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m02_couplers_m02_regslice_s_axi_awvalid">
+        <PORT DIR="O" LEFT="4" NAME="m_axi_awvalid" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_awvalid">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="s_axi_awvalid"/>
           </CONNECTIONS>
@@ -3195,8 +3954,14 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="s_axi_awvalid"/>
           </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="s_axi_awvalid"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="s_axi_awvalid"/>
+          </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="2" NAME="m_axi_awready" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m02_couplers_m02_regslice_s_axi_awready">
+        <PORT DIR="I" LEFT="4" NAME="m_axi_awready" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_awready">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="s_axi_awready"/>
           </CONNECTIONS>
@@ -3206,8 +3971,14 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="s_axi_awready"/>
           </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="s_axi_awready"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="s_axi_awready"/>
+          </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="95" NAME="m_axi_wdata" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m02_couplers_m02_regslice_s_axi_wdata">
+        <PORT DIR="O" LEFT="159" NAME="m_axi_wdata" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_wdata">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="s_axi_wdata"/>
           </CONNECTIONS>
@@ -3217,8 +3988,14 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="s_axi_wdata"/>
           </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="s_axi_wdata"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="s_axi_wdata"/>
+          </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="11" NAME="m_axi_wstrb" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m02_couplers_m02_regslice_s_axi_wstrb">
+        <PORT DIR="O" LEFT="19" NAME="m_axi_wstrb" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_wstrb">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="s_axi_wstrb"/>
           </CONNECTIONS>
@@ -3228,8 +4005,14 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="s_axi_wstrb"/>
           </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="s_axi_wstrb"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="s_axi_wstrb"/>
+          </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="2" NAME="m_axi_wvalid" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m02_couplers_m02_regslice_s_axi_wvalid">
+        <PORT DIR="O" LEFT="4" NAME="m_axi_wvalid" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_wvalid">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="s_axi_wvalid"/>
           </CONNECTIONS>
@@ -3239,8 +4022,14 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="s_axi_wvalid"/>
           </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="s_axi_wvalid"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="s_axi_wvalid"/>
+          </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="2" NAME="m_axi_wready" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m02_couplers_m02_regslice_s_axi_wready">
+        <PORT DIR="I" LEFT="4" NAME="m_axi_wready" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_wready">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="s_axi_wready"/>
           </CONNECTIONS>
@@ -3250,8 +4039,14 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="s_axi_wready"/>
           </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="s_axi_wready"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="s_axi_wready"/>
+          </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="5" NAME="m_axi_bresp" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m02_couplers_m02_regslice_s_axi_bresp">
+        <PORT DIR="I" LEFT="9" NAME="m_axi_bresp" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_bresp">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="s_axi_bresp"/>
           </CONNECTIONS>
@@ -3261,8 +4056,14 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="s_axi_bresp"/>
           </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="s_axi_bresp"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="s_axi_bresp"/>
+          </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="2" NAME="m_axi_bvalid" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m02_couplers_m02_regslice_s_axi_bvalid">
+        <PORT DIR="I" LEFT="4" NAME="m_axi_bvalid" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_bvalid">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="s_axi_bvalid"/>
           </CONNECTIONS>
@@ -3272,8 +4073,14 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="s_axi_bvalid"/>
           </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="s_axi_bvalid"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="s_axi_bvalid"/>
+          </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="2" NAME="m_axi_bready" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m02_couplers_m02_regslice_s_axi_bready">
+        <PORT DIR="O" LEFT="4" NAME="m_axi_bready" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_bready">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="s_axi_bready"/>
           </CONNECTIONS>
@@ -3283,8 +4090,14 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="s_axi_bready"/>
           </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="s_axi_bready"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="s_axi_bready"/>
+          </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="95" NAME="m_axi_araddr" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m02_couplers_m02_regslice_s_axi_araddr">
+        <PORT DIR="O" LEFT="159" NAME="m_axi_araddr" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_araddr">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="s_axi_araddr"/>
           </CONNECTIONS>
@@ -3294,8 +4107,14 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="s_axi_araddr"/>
           </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="s_axi_araddr"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="s_axi_araddr"/>
+          </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="8" NAME="m_axi_arprot" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m02_couplers_m02_regslice_s_axi_arprot">
+        <PORT DIR="O" LEFT="14" NAME="m_axi_arprot" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_arprot">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="s_axi_arprot"/>
           </CONNECTIONS>
@@ -3305,8 +4124,14 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="s_axi_arprot"/>
           </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="s_axi_arprot"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="s_axi_arprot"/>
+          </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="2" NAME="m_axi_arvalid" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m02_couplers_m02_regslice_s_axi_arvalid">
+        <PORT DIR="O" LEFT="4" NAME="m_axi_arvalid" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_arvalid">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="s_axi_arvalid"/>
           </CONNECTIONS>
@@ -3316,8 +4141,14 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="s_axi_arvalid"/>
           </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="s_axi_arvalid"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="s_axi_arvalid"/>
+          </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="2" NAME="m_axi_arready" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m02_couplers_m02_regslice_s_axi_arready">
+        <PORT DIR="I" LEFT="4" NAME="m_axi_arready" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_arready">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="s_axi_arready"/>
           </CONNECTIONS>
@@ -3327,8 +4158,14 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="s_axi_arready"/>
           </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="s_axi_arready"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="s_axi_arready"/>
+          </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="95" NAME="m_axi_rdata" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m02_couplers_m02_regslice_s_axi_rdata">
+        <PORT DIR="I" LEFT="159" NAME="m_axi_rdata" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_rdata">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="s_axi_rdata"/>
           </CONNECTIONS>
@@ -3338,8 +4175,14 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="s_axi_rdata"/>
           </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="s_axi_rdata"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="s_axi_rdata"/>
+          </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="5" NAME="m_axi_rresp" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m02_couplers_m02_regslice_s_axi_rresp">
+        <PORT DIR="I" LEFT="9" NAME="m_axi_rresp" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_rresp">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="s_axi_rresp"/>
           </CONNECTIONS>
@@ -3349,8 +4192,14 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="s_axi_rresp"/>
           </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="s_axi_rresp"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="s_axi_rresp"/>
+          </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="2" NAME="m_axi_rvalid" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m02_couplers_m02_regslice_s_axi_rvalid">
+        <PORT DIR="I" LEFT="4" NAME="m_axi_rvalid" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_rvalid">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="s_axi_rvalid"/>
           </CONNECTIONS>
@@ -3360,8 +4209,14 @@
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="s_axi_rvalid"/>
           </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="s_axi_rvalid"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="s_axi_rvalid"/>
+          </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="2" NAME="m_axi_rready" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m02_couplers_m02_regslice_s_axi_rready">
+        <PORT DIR="O" LEFT="4" NAME="m_axi_rready" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m04_couplers_m04_regslice_s_axi_rready">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="s_axi_rready"/>
           </CONNECTIONS>
@@ -3370,6 +4225,12 @@
           </CONNECTIONS>
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="s_axi_rready"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="s_axi_rready"/>
+          </CONNECTIONS>
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="s_axi_rready"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -3466,7 +4327,219 @@
             <PORTMAP PHYSICAL="m_axi_rready"/>
           </PORTMAPS>
         </BUSINTERFACE>
+        <BUSINTERFACE BUSNAME="processing_system7_0_axi_periph_xbar_M03_AXI" NAME="M03_AXI" TYPE="MASTER">
+          <PORTMAPS>
+            <PORTMAP PHYSICAL="m_axi_awaddr"/>
+            <PORTMAP PHYSICAL="m_axi_awprot"/>
+            <PORTMAP PHYSICAL="m_axi_awvalid"/>
+            <PORTMAP PHYSICAL="m_axi_awready"/>
+            <PORTMAP PHYSICAL="m_axi_wdata"/>
+            <PORTMAP PHYSICAL="m_axi_wstrb"/>
+            <PORTMAP PHYSICAL="m_axi_wvalid"/>
+            <PORTMAP PHYSICAL="m_axi_wready"/>
+            <PORTMAP PHYSICAL="m_axi_bresp"/>
+            <PORTMAP PHYSICAL="m_axi_bvalid"/>
+            <PORTMAP PHYSICAL="m_axi_bready"/>
+            <PORTMAP PHYSICAL="m_axi_araddr"/>
+            <PORTMAP PHYSICAL="m_axi_arprot"/>
+            <PORTMAP PHYSICAL="m_axi_arvalid"/>
+            <PORTMAP PHYSICAL="m_axi_arready"/>
+            <PORTMAP PHYSICAL="m_axi_rdata"/>
+            <PORTMAP PHYSICAL="m_axi_rresp"/>
+            <PORTMAP PHYSICAL="m_axi_rvalid"/>
+            <PORTMAP PHYSICAL="m_axi_rready"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+        <BUSINTERFACE BUSNAME="processing_system7_0_axi_periph_xbar_M04_AXI" NAME="M04_AXI" TYPE="MASTER">
+          <PORTMAPS>
+            <PORTMAP PHYSICAL="m_axi_awaddr"/>
+            <PORTMAP PHYSICAL="m_axi_awprot"/>
+            <PORTMAP PHYSICAL="m_axi_awvalid"/>
+            <PORTMAP PHYSICAL="m_axi_awready"/>
+            <PORTMAP PHYSICAL="m_axi_wdata"/>
+            <PORTMAP PHYSICAL="m_axi_wstrb"/>
+            <PORTMAP PHYSICAL="m_axi_wvalid"/>
+            <PORTMAP PHYSICAL="m_axi_wready"/>
+            <PORTMAP PHYSICAL="m_axi_bresp"/>
+            <PORTMAP PHYSICAL="m_axi_bvalid"/>
+            <PORTMAP PHYSICAL="m_axi_bready"/>
+            <PORTMAP PHYSICAL="m_axi_araddr"/>
+            <PORTMAP PHYSICAL="m_axi_arprot"/>
+            <PORTMAP PHYSICAL="m_axi_arvalid"/>
+            <PORTMAP PHYSICAL="m_axi_arready"/>
+            <PORTMAP PHYSICAL="m_axi_rdata"/>
+            <PORTMAP PHYSICAL="m_axi_rresp"/>
+            <PORTMAP PHYSICAL="m_axi_rvalid"/>
+            <PORTMAP PHYSICAL="m_axi_rready"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
       </BUSINTERFACES>
+    </MODULE>
+    <MODULE FULLNAME="/servo_pwm_v1_0_0" HWVERSION="1.0" INSTANCE="servo_pwm_v1_0_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="servo_pwm_v1_0" VLNV="dronecode.org:zynq:servo_pwm_v1_0:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="C_S00_AXI_DATA_WIDTH" VALUE="32"/>
+        <PARAMETER NAME="C_S00_AXI_ADDR_WIDTH" VALUE="10"/>
+        <PARAMETER NAME="C_NUM_PWM" VALUE="12"/>
+        <PARAMETER NAME="Component_Name" VALUE="system_servo_pwm_v1_0_0_1"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+        <PARAMETER NAME="C_BASEADDR" VALUE="0x43C00000"/>
+        <PARAMETER NAME="C_HIGHADDR" VALUE="0x43C0FFFF"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" LEFT="11" NAME="PWM" RIGHT="0" SIGIS="undef" SIGNAME="servo_pwm_v1_0_0_PWM">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="PWM"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="s00_axi_aclk" SIGIS="clk" SIGNAME="processing_system7_0_FCLK_CLK0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="ps7_clockc_0" PORT="FCLK0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s00_axi_aresetn" SIGIS="rst" SIGNAME="proc_sys_reset_0_peripheral_aresetn">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="proc_sys_reset_0" PORT="peripheral_aresetn"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="9" NAME="s00_axi_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_awaddr">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="m_axi_awaddr"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="2" NAME="s00_axi_awprot" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_awprot">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="m_axi_awprot"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s00_axi_awvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_awvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="m_axi_awvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s00_axi_awready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_awready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="m_axi_awready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="31" NAME="s00_axi_wdata" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_wdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="m_axi_wdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="3" NAME="s00_axi_wstrb" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_wstrb">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="m_axi_wstrb"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s00_axi_wvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_wvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="m_axi_wvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s00_axi_wready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_wready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="m_axi_wready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="1" NAME="s00_axi_bresp" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_bresp">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="m_axi_bresp"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s00_axi_bvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_bvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="m_axi_bvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s00_axi_bready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_bready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="m_axi_bready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="9" NAME="s00_axi_araddr" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_araddr">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="m_axi_araddr"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="2" NAME="s00_axi_arprot" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_arprot">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="m_axi_arprot"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s00_axi_arvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_arvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="m_axi_arvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s00_axi_arready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_arready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="m_axi_arready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="31" NAME="s00_axi_rdata" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_rdata">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="m_axi_rdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="1" NAME="s00_axi_rresp" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_rresp">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="m_axi_rresp"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="s00_axi_rvalid" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_rvalid">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="m_axi_rvalid"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="s00_axi_rready" SIGIS="undef" SIGNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_m_axi_rready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="m_axi_rready"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES>
+        <BUSINTERFACE BUSNAME="processing_system7_0_axi_periph_m03_couplers_m03_regslice_M_AXI" NAME="s00_axi" TYPE="SLAVE">
+          <PORTMAPS>
+            <PORTMAP PHYSICAL="s00_axi_awaddr"/>
+            <PORTMAP PHYSICAL="s00_axi_awprot"/>
+            <PORTMAP PHYSICAL="s00_axi_awvalid"/>
+            <PORTMAP PHYSICAL="s00_axi_awready"/>
+            <PORTMAP PHYSICAL="s00_axi_wdata"/>
+            <PORTMAP PHYSICAL="s00_axi_wstrb"/>
+            <PORTMAP PHYSICAL="s00_axi_wvalid"/>
+            <PORTMAP PHYSICAL="s00_axi_wready"/>
+            <PORTMAP PHYSICAL="s00_axi_bresp"/>
+            <PORTMAP PHYSICAL="s00_axi_bvalid"/>
+            <PORTMAP PHYSICAL="s00_axi_bready"/>
+            <PORTMAP PHYSICAL="s00_axi_araddr"/>
+            <PORTMAP PHYSICAL="s00_axi_arprot"/>
+            <PORTMAP PHYSICAL="s00_axi_arvalid"/>
+            <PORTMAP PHYSICAL="s00_axi_arready"/>
+            <PORTMAP PHYSICAL="s00_axi_rdata"/>
+            <PORTMAP PHYSICAL="s00_axi_rresp"/>
+            <PORTMAP PHYSICAL="s00_axi_rvalid"/>
+            <PORTMAP PHYSICAL="s00_axi_rready"/>
+          </PORTMAPS>
+        </BUSINTERFACE>
+      </BUSINTERFACES>
+    </MODULE>
+    <MODULE FULLNAME="/xlconstant_0" HWVERSION="1.1" INSTANCE="xlconstant_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="xlconstant" VLNV="xilinx.com:ip:xlconstant:1.1">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="CONST_VAL" VALUE="0"/>
+        <PARAMETER NAME="CONST_WIDTH" VALUE="1"/>
+        <PARAMETER NAME="Component_Name" VALUE="system_xlconstant_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="O" LEFT="0" NAME="dout" RIGHT="0" SIGIS="undef" SIGNAME="xlconstant_0_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="RCVR_GND"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
     </MODULE>
     <MODULE HWVERSION="1.00.a" INSTANCE="ps7_clockc_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" IS_PL="FALSE" MODCLASS="PERIPHERAL" MODTYPE="ps7_clockc">
       <PARAMETERS>
@@ -3505,6 +4578,10 @@
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m00_couplers_m00_regslice" PORT="aclk"/>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m01_couplers_m01_regslice" PORT="aclk"/>
             <CONNECTION INSTANCE="processing_system7_0_axi_periph_m02_couplers_m02_regslice" PORT="aclk"/>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m03_couplers_m03_regslice" PORT="aclk"/>
+            <CONNECTION INSTANCE="servo_pwm_v1_0_0" PORT="s00_axi_aclk"/>
+            <CONNECTION INSTANCE="axi_pulsetrain_in_0" PORT="s00_axi_aclk"/>
+            <CONNECTION INSTANCE="processing_system7_0_axi_periph_m04_couplers_m04_regslice" PORT="aclk"/>
           </CONNECTIONS>
         </PORT>
         <PORT CLKFREQUENCY="150000000" DIR="O" NAME="FCLK1" SIGIS="CLK" SIGNAME="ps7_clockc_0_FCLK1">
@@ -5815,6 +6892,8 @@
         <MEMRANGE ADDRESSBLOCK="Reg" BASENAME="C_BASEADDR" BASEVALUE="0x41200000" HIGHNAME="C_HIGHADDR" HIGHVALUE="0x4120FFFF" INSTANCE="SWs_4Bits" IS_DATA="TRUE" IS_INSTRUCTION="FALSE" MEMTYPE="REGISTER"/>
         <MEMRANGE ADDRESSBLOCK="Reg" BASENAME="C_BASEADDR" BASEVALUE="0x41210000" HIGHNAME="C_HIGHADDR" HIGHVALUE="0x4121FFFF" INSTANCE="BTNs_4Bits" IS_DATA="TRUE" IS_INSTRUCTION="FALSE" MEMTYPE="REGISTER"/>
         <MEMRANGE ADDRESSBLOCK="Reg" BASENAME="C_BASEADDR" BASEVALUE="0x41220000" HIGHNAME="C_HIGHADDR" HIGHVALUE="0x4122FFFF" INSTANCE="LEDs_4Bits" IS_DATA="TRUE" IS_INSTRUCTION="FALSE" MEMTYPE="REGISTER"/>
+        <MEMRANGE ADDRESSBLOCK="reg0" BASENAME="C_BASEADDR" BASEVALUE="0x43C00000" HIGHNAME="C_HIGHADDR" HIGHVALUE="0x43C0FFFF" INSTANCE="servo_pwm_v1_0_0" IS_DATA="TRUE" IS_INSTRUCTION="FALSE" MEMTYPE="REGISTER"/>
+        <MEMRANGE ADDRESSBLOCK="S00_AXI_reg" BASENAME="C_S00_AXI_BASEADDR" BASEVALUE="0x43C10000" HIGHNAME="C_S00_AXI_HIGHADDR" HIGHVALUE="0x43C1FFFF" INSTANCE="axi_pulsetrain_in_0" IS_DATA="TRUE" IS_INSTRUCTION="FALSE" MEMTYPE="REGISTER"/>
       </MEMORYMAP>
       <PERIPHERALS>
         <PERIPHERAL INSTANCE="ps7_ram_0"/>
@@ -5855,6 +6934,8 @@
         <PERIPHERAL INSTANCE="SWs_4Bits"/>
         <PERIPHERAL INSTANCE="BTNs_4Bits"/>
         <PERIPHERAL INSTANCE="LEDs_4Bits"/>
+        <PERIPHERAL INSTANCE="servo_pwm_v1_0_0"/>
+        <PERIPHERAL INSTANCE="axi_pulsetrain_in_0"/>
       </PERIPHERALS>
     </MODULE>
     <MODULE HWVERSION="5.2" INSTANCE="ps7_cortexa9_1" IPTYPE="PROCESSOR" IS_ENABLE="1" IS_PL="FALSE" MODCLASS="PROCESSOR" MODTYPE="ps7_cortexa9">
@@ -6050,6 +7131,8 @@
         <MEMRANGE ADDRESSBLOCK="Reg" BASENAME="C_BASEADDR" BASEVALUE="0x41200000" HIGHNAME="C_HIGHADDR" HIGHVALUE="0x4120FFFF" INSTANCE="SWs_4Bits" IS_DATA="TRUE" IS_INSTRUCTION="FALSE" MEMTYPE="REGISTER"/>
         <MEMRANGE ADDRESSBLOCK="Reg" BASENAME="C_BASEADDR" BASEVALUE="0x41210000" HIGHNAME="C_HIGHADDR" HIGHVALUE="0x4121FFFF" INSTANCE="BTNs_4Bits" IS_DATA="TRUE" IS_INSTRUCTION="FALSE" MEMTYPE="REGISTER"/>
         <MEMRANGE ADDRESSBLOCK="Reg" BASENAME="C_BASEADDR" BASEVALUE="0x41220000" HIGHNAME="C_HIGHADDR" HIGHVALUE="0x4122FFFF" INSTANCE="LEDs_4Bits" IS_DATA="TRUE" IS_INSTRUCTION="FALSE" MEMTYPE="REGISTER"/>
+        <MEMRANGE ADDRESSBLOCK="reg0" BASENAME="C_BASEADDR" BASEVALUE="0x43C00000" HIGHNAME="C_HIGHADDR" HIGHVALUE="0x43C0FFFF" INSTANCE="servo_pwm_v1_0_0" IS_DATA="TRUE" IS_INSTRUCTION="FALSE" MEMTYPE="REGISTER"/>
+        <MEMRANGE ADDRESSBLOCK="S00_AXI_reg" BASENAME="C_S00_AXI_BASEADDR" BASEVALUE="0x43C10000" HIGHNAME="C_S00_AXI_HIGHADDR" HIGHVALUE="0x43C1FFFF" INSTANCE="axi_pulsetrain_in_0" IS_DATA="TRUE" IS_INSTRUCTION="FALSE" MEMTYPE="REGISTER"/>
       </MEMORYMAP>
       <PERIPHERALS>
         <PERIPHERAL INSTANCE="ps7_ram_0"/>
@@ -6090,6 +7173,8 @@
         <PERIPHERAL INSTANCE="SWs_4Bits"/>
         <PERIPHERAL INSTANCE="BTNs_4Bits"/>
         <PERIPHERAL INSTANCE="LEDs_4Bits"/>
+        <PERIPHERAL INSTANCE="servo_pwm_v1_0_0"/>
+        <PERIPHERAL INSTANCE="axi_pulsetrain_in_0"/>
       </PERIPHERALS>
     </MODULE>
     <MODULE HWVERSION="1.00.a" INSTANCE="ps7_ddr_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" IS_PL="FALSE" MODCLASS="MEMORY_CNTLR" MODTYPE="ps7_ddr">
@@ -10533,6 +11618,8 @@
     </MODULE>
   </MODULES>
 
-  <REPOSITORIES/>
+  <REPOSITORIES>
+    <REPOSITORY ABSPATH="/home/jwilliams/flight/plnx/ZyboPilot-bsp/hardware/iprepo/axi_pulsetrain_in_1.0" RELPATH="../../../../../iprepo/axi_pulsetrain_in_1.0"/>
+  </REPOSITORIES>
 
 </EDKSYSTEM>
